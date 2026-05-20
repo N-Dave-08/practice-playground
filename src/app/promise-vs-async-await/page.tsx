@@ -42,14 +42,25 @@ export default function PromiseVSAsyncAwait() {
     });
   }
 
-  firstTask()
-    .then((value) => {
-      console.log(value);
-      return secondTask().then((value) => {
-        console.log(value);
-      });
-    })
-    .catch((error) => console.error(error));
+  // firstTask()
+  //   .then((value) => {
+  //     console.log(value);
+  //     return secondTask().then((value) => {
+  //       console.log(value);
+  //     });
+  //   })
+  //   .catch((error) => console.error(error));
+
+  // converted to async/await
+  async function runTasks() {
+    const firstTaskResult = await firstTask();
+    console.log(firstTaskResult);
+
+    const secondTaskResult = await secondTask();
+    console.log(secondTaskResult);
+  }
+
+  runTasks();
 
   // Key idea
   // Promises use .then() and .catch() to handle async results.
