@@ -74,8 +74,17 @@ export default function Closure() {
   //   let
   for (let i = 1; i <= 3; i++) {
     setTimeout(() => {
+      debugger;
       console.log(i);
     }, 1000);
+  }
+
+  for (let i = 1; i <= 3; i++) {
+    const log = () => {
+      debugger;
+      console.log(i);
+    };
+    setTimeout(log, 100);
   }
 
   return <div>page</div>;

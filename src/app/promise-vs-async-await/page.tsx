@@ -6,13 +6,50 @@ export default function PromiseVSAsyncAwait() {
   // Example:
   const fetchData = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve("Data loaded");
+      resolve("Data Loaded");
     }, 1000);
   });
 
   fetchData.then((data) => {
     console.log(data);
   });
+
+  function firstTask() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const firstTaskDone = true;
+
+        if (firstTaskDone) {
+          resolve("first task done!");
+        } else {
+          reject("first task failed");
+        }
+      }, 1500);
+    });
+  }
+
+  function secondTask() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const secondTaskDone = true;
+
+        if (secondTaskDone) {
+          resolve("second task done!");
+        } else {
+          reject("second task failed");
+        }
+      }, 2000);
+    });
+  }
+
+  firstTask()
+    .then((value) => {
+      console.log(value);
+      return secondTask().then((value) => {
+        console.log(value);
+      });
+    })
+    .catch((error) => console.error(error));
 
   // Key idea
   // Promises use .then() and .catch() to handle async results.

@@ -10,29 +10,29 @@ export default function EventLoop() {
 
   // Examples:
 
-  console.log("A");
+  // console.log("A");
 
-  setTimeout(() => {
-    console.log("B");
-  }, 0);
+  // setTimeout(() => {
+  //   console.log("B");
+  // }, 0);
 
-  console.log("C");
+  // console.log("C");
 
   // ================================================
   //   Promises vs setTimeout
   // ================================================
 
-  console.log("1");
+  console.log("first");
 
   setTimeout(() => {
-    console.log("2");
+    console.log("setTimout");
   }, 0);
 
   Promise.resolve().then(() => {
-    console.log("3");
+    console.log("Promise");
   });
 
-  console.log("4");
+  console.log("second");
 
   //   Order:
   //    Sync first:
