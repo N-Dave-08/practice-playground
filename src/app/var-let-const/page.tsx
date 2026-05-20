@@ -90,5 +90,146 @@ export default function VarLetConst() {
 
   test();
 
+  console.log("========== complex examples ==========");
+
+  var wizards = ["Merlin", "Gandalf", "Ursula", "Radagast"];
+  var items = ["Spellbook", "Staff", "Urchins", "Pinecones"];
+
+  /*
+  var is function-scoped → ONLY ONE shared "item" variable exists
+
+  Both loops reuse the same variable name:
+  outer loop overwrites it
+  inner loop overwrites it again
+*/
+
+  for (var item of wizards) {
+    console.log(1, item);
+
+    for (var item of items) {
+      // inner loop overwrites the SAME "item"
+    }
+
+    console.log(2, item);
+    // always becomes "Pinecones"
+  }
+
+  /*
+========================
+❌ FINAL OUTPUT
+========================
+1 Merlin
+2 Pinecones
+
+1 Gandalf
+2 Pinecones
+
+1 Ursula
+2 Pinecones
+
+1 Radagast
+2 Pinecones
+*/
+
+  /*
+========================
+🧠 LOOP VISUALIZATION
+========================
+
+Outer: Merlin
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+
+Outer: Gandalf
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+
+Outer: Ursula
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+
+Outer: Radagast
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+*/
+
+  var wizards = ["Merlin", "Gandalf", "Ursula", "Radagast"];
+  var items = ["Spellbook", "Staff", "Urchins", "Pinecones"];
+
+  /*
+  let is BLOCK-scoped:
+  → outer loop has its own "item"
+  → inner loop has a separate "item"
+  → no shared variable anymore
+*/
+
+  for (let wizard of wizards) {
+    console.log(1, wizard);
+
+    for (let item of items) {
+      // completely separate variable from outer loop
+    }
+
+    console.log(2, wizard);
+  }
+
+  /*
+========================
+✅ CORRECT OUTPUT
+========================
+1 Merlin
+2 Merlin
+
+1 Gandalf
+2 Gandalf
+
+1 Ursula
+2 Ursula
+
+1 Radagast
+2 Radagast
+*/
+
+  /*
+========================
+🧠 LOOP VISUALIZATION
+========================
+
+Outer: Merlin
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+   → outer still = Merlin
+
+Outer: Gandalf
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+   → outer still = Gandalf
+
+Outer: Ursula
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+   → outer still = Ursula
+
+Outer: Radagast
+   Inner: Spellbook
+   Inner: Staff
+   Inner: Urchins
+   Inner: Pinecones
+   → outer still = Radagast
+*/
   return <div>demo</div>;
 }
