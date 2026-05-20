@@ -74,19 +74,32 @@ console.log("grouped", grouped);
 // ================================================
 const fruits: string[] = ["apple", "banana", "apple", "orange", "banana"];
 
+// This type means:
+// "An object where each key is a string (fruit name),
+// and each value is a number (count of occurrences)"
 type CountMap = {
   [key: string]: number;
 };
 
 const count: CountMap = fruits.reduce(
   (acc: CountMap, fruit: string): CountMap => {
+    // acc = the object we are building step by step
+
+    // If this fruit already exists in acc, use its value
+    // If not, start from 0
+    //
+    // Example:
+    // acc["apple"] = 1 → next apple becomes 2
+    // acc["banana"] = undefined → treat as 0
     acc[fruit] = (acc[fruit] || 0) + 1;
+
+    // Return updated accumulator for next loop iteration
     return acc;
   },
-  {},
+  {}, // Start with an empty object
 );
 
-console.log("count occurences", count);
+console.log("count occurrences", count);
 
 export default function PracticeTask() {
   return <div>page</div>;
